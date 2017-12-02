@@ -1,0 +1,53 @@
+{% extends "base_site.html"%}
+
+{% block title %}
+Detail
+{% endblock %}
+
+{% block content %}
+<table>
+<tr>
+<td>
+<p>Detail by service provider:</p>
+<table>
+<thead>
+<th>Provider</th><th>Case(s)</th>
+</thead>
+{% for list in provider %}
+<tr>
+{% ifchanged list.whois_as %}
+<td><a href="../../whois_filter/{{list.whois_as}}/">{{list.whois_as_name|slice:"30"}}</a></td>
+<td><center>{{list.count}}</center></td>
+{% endifchanged %}
+</tr>
+{% endfor %}
+</table>
+</td>
+
+<td>   
+<p>Detail by system:</p>
+<table> 
+<thead>
+<th>System</th><th>Case(s)</th>
+</thead>
+{% for list in system_type %}
+<tr><td><a href="../../system/{{list.id}}/">{{list}}</a></td><td><center>{{list.count}}</center></td></tr>
+{% endfor %}
+</table>
+</td>
+
+<td>   
+<p>Detail by webserver:</p>
+<table>
+<thead>
+<th>Webserver</th><th>Case(s)</th>
+</thead>
+{% for list in webserver_type %}
+<tr><td><a href="../../webserver/{{list.id}}/">{{list}}</a></td><td><center>{{list.count}}</center></td></tr>
+{% endfor %}
+</table>
+</td>
+</tr>
+</table>
+
+{% endblock %}

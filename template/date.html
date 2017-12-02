@@ -1,0 +1,36 @@
+{% extends "base_site.html"%}
+
+{% block title %}
+Detail by date
+{% endblock %}
+{% block content %}
+<table>
+<tr><td>Date</td><td>{{offset}}</td></tr>
+<tr><td>Number of domains(s)</td><td>{{domain}} domain(s)</td></tr>
+<tr><td>Number of case(s)</td><td>{{case}} case(s)</td></tr>
+<tr><td>List of domain(s)</td><td>{% for list in object_list %}{{list.domain_name}}<br>{% endfor %}</td></tr>
+<tr><td>Unique IP Address</td><td>{% for list in ip_list %}{{list.ip_address}}<br>{% endfor %}</td></tr>
+</table>
+<br><br><table>
+<thead>
+<th>IP Address</th><th>AS Number</th><th>AS Name</th><th>Domain</th><th>Defacer</th><th>System</th><th>Webserver</th>
+</thead>
+{% for list in ip_list %}
+     <tr>
+     <td><a href="../../whois/{{list}}/">{{list}}</a></td>
+     <td><a href="../../whois_filter/{{list.ip_address.whois_as}}/">{{list.ip_address.whois_as}}</a></td>
+     <td><a href="../../whois_filter/{{list.ip_address.whois_as}}/">{{list.ip_address.whois_as_name}}</a></td>
+     <td>{% for list2 in object_list %}
+         {% ifequal list2.domain_id list.id %}
+         <a href="../../{{list2.domain.mirror.mirror_link}}">{{list2.domain_name}}</a><br>
+         {% endifequal %}
+         {% endfor %}</td>
+     <td><a href="../../defacer/{{list.defacer_name_id}}/">{{list.defacer_name}}</a></td>
+     <td><a href="../../system/{{list.system_type.id}}/">{{list.system_type}}</a></td>
+     <td><a href="../../webserver/{{list.web_server.id}}/">{{list.web_server}}</a></td>
+     </tr>
+{% endfor %}
+</table>
+
+{% endblock %}
+

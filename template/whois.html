@@ -1,0 +1,18 @@
+{% extends "base_site.html"%}
+
+{% block title %}
+Whois Information
+{% endblock %}
+
+{% block content %}
+<p>Current whois information:</p>
+{{output}}
+{% for list in available %}
+{% if list %}<br>
+<p>Saved whois information:</p>
+<p>AS: {{list.whois_as}}</p>
+<p>IP Address: {{list.ip_number}}</p>
+<p>AS Name: <a href="../../whois_filter/{{list.whois_as}}/">{{list.whois_as_name}}</a></p>
+{% endif %}
+{% endfor %}
+{% endblock %}

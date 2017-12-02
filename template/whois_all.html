@@ -1,0 +1,18 @@
+{% extends "base_site.html"%}
+{% block title %}
+Whois
+{% endblock %}
+{% block content %}
+<table>
+<thead>
+<th>AS Number</th><th>IP Address</th><th>AS Name</th>
+</thead>
+{% for list in object_list %}
+<tr>
+<td><a href="../../whois_filter/{{list.whois_as}}/">{{list.whois_as}}</a></td>
+<td><a href="../../whois/{{list.ip_number}}/">{{list.ip_number}}</a></td>
+<td><a href="../../whois_filter/{{list.whois_as}}/">{{list.whois_as_name}}</a></td>
+</td>
+{% endfor %}
+</table>
+{% endblock %}

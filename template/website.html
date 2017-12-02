@@ -1,0 +1,31 @@
+{% extends "base_site.html"%}
+
+{% block title %}
+Defaced Website
+{% endblock %}
+
+{% block content %}
+
+<table>
+<thead>
+<th>Date</th><th>Domain Name</th><th>Defacer</th><th>System</th><th>Web Server</th><th>IP Address</th><th>Link Address</th>
+</thead>
+   {% for list in domain_list %}
+      <tr>
+      <td> <a href="../../detail/{{list.domain.date_defaced}}/">{{list.domain.date_defaced}}</a></td>
+      <td> <a href="../../{{list.domain.mirror}}/">{{list.domain_name}}</a></td>
+      <td> <a href="../../defacer/{{list.domain.defacer_name_id}}/">{{list.domain.defacer_name}}</a></td>
+      <td> <a href="../../system/{{list.domain.system_type_id}}/">{{list.domain.system_type}}</a></td>
+      <td> <a href="../../webserver/{{list.domain.web_server_id}}/">{{list.domain.web_server}}</a></td>
+      <td> <a href="../../whois/{{list.domain.ip_address}}/">{{list.domain.ip_address}}</a></td>
+      <td> {{list.link_address }}</td>
+      </tr>
+   {% endfor %}
+</table>
+<br>
+<a href="../../{{previous}}">Previous</a>
+{% for list in output %}
+{{list}}
+{% endfor %}
+<a href="../../{{next}}">Next</a><br><br>
+{% endblock %}

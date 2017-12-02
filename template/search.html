@@ -1,0 +1,37 @@
+{% extends "base_site.html"%}
+
+{% block title %}
+Search
+{% endblock %}
+
+{% block content %}
+<form method="post" action=".">
+Search:
+<input type="text" name="text" value="{{search.text}}">
+<input type="submit" value="Submit"><br>
+<p>Search by:
+<input type="radio" name="category" value="defacer" checked="checked"/> Defacer
+<input type="radio" name="category" value="domain"/> Domain
+<input type="radio" name="category" value="ipaddress"/> IP Address
+</p>
+</form>
+{{prompt}}
+{% if output_list %}
+<br>Search result for keyword <b>'{{search.text}}'</b>:
+<table>
+<thead>
+<th>Date</th><th>Domain Name</th><th>Defacer</th><th>System</th><th>Web Server</th><th>IP Address</th><th>Link Address</th>
+</thead>
+{% for list in output_list %}
+   <tr>  
+      <td> <a href="../../detail/{{list.domain.date_defaced}}/">{{list.domain.date_defaced}}</a></td>
+      <td> <a href="../../{{list.domain.mirror}}/">{{list.domain_name}}</a></td>
+      <td> <a href="../../defacer/{{list.domain.defacer_name_id}}/">{{list.domain.defacer_name}}</a></td>
+      <td> <a href="../../system/{{list.domain.system_type_id}}/">{{list.domain.system_type}}</a></td>
+      <td> <a href="../../webserver/{{list.domain.web_server_id}}/">{{list.domain.web_server}}</a></td>
+      <td> <a href="../../whois/{{list.domain.ip_address}}/">{{list.domain.ip_address}}</a></td>
+      <td> {{list.link_address }}</td>
+   </tr>
+{% endfor %}
+{% endif %}
+{% endblock %}
